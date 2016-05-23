@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.reed.reedplayer.model.BaseModelSource;
 import com.reed.reedplayer.model.Model;
 import com.reed.reedplayer.presenter.ViewGroupPresenter;
 
@@ -13,7 +14,9 @@ import java.util.List;
 /**
  * Created by thinkreed on 16/5/4.
  */
-public abstract class BaseReedAdapter extends RecyclerView.Adapter<BaseReedAdapter.ViewHolder> {
+public abstract class BaseReedAdapter extends RecyclerView.Adapter<BaseReedAdapter.ViewHolder>
+    implements
+      BaseModelSource.SourceObserver {
 
   private List<Model> mDataList = new ArrayList<>();
 
@@ -34,7 +37,12 @@ public abstract class BaseReedAdapter extends RecyclerView.Adapter<BaseReedAdapt
     return mDataList.size();
   }
 
-  public void setDataList(List<Model> dataList) {
+  private void setDataList(List<Model> dataList) {
+    if (dataList == null) {
+      return;
+    }
+    mDataList.clear();
+    mDataList = null;
     mDataList = dataList;
     notifyDataSetChanged();
   }
@@ -47,6 +55,12 @@ public abstract class BaseReedAdapter extends RecyclerView.Adapter<BaseReedAdapt
   public List<Model> getDataList() {
     return mDataList;
   }
+
+  @Override
+  public void onDataRetrived(List<Model> models) {
+    setDataList(models);
+  }
+
 
   public static class ViewHolder extends RecyclerView.ViewHolder {
 

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ReedPlayer</string>
+
+    <string name="local_songs">本地歌曲</string>
 </resources>

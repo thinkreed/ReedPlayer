@@ -9,6 +9,16 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  */
 public class ReedApplication extends Application {
 
+  private static ReedApplication sInstance;
+
+  public static ReedApplication getInstance() {
+    return sInstance;
+  }
+
+  public ReedApplication() {
+    sInstance = this;
+  }
+
   @Override
   public void onCreate() {
     super.onCreate();
