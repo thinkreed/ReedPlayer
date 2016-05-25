@@ -34,7 +34,7 @@ public class ViewGroupPresenter {
 
   public Presenter findChildPresenter(int index) {
     int viewId = mChildPresenters.keyAt(index);
-    View childView = rootView.findViewById(viewId);
+    View childView = viewId == 0 ? rootView : rootView.findViewById(viewId);
     if (childView == null) {
       return null;
     } else {

@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.reed.reedplayer.R;
 import com.reed.reedplayer.model.Model;
 import com.reed.reedplayer.presenter.DisplayPresenter;
+import com.reed.reedplayer.presenter.MotionPresenter;
 import com.reed.reedplayer.presenter.ViewGroupPresenter;
 
 /**
@@ -20,6 +21,7 @@ public class SongListAdapter extends BaseReedAdapter {
         return new ViewGroupPresenter(parent, context, R.layout.item_song_info)
             .add(new DisplayPresenter(), R.id.title)
             .add(new DisplayPresenter(), R.id.cover)
+            .add(new MotionPresenter(), 0)
             .add(new DisplayPresenter(), R.id.artist);
       default:
         return null;
