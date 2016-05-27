@@ -7,22 +7,22 @@ import android.os.Parcelable;
  * Created by thinkreed on 16/5/4.
  */
 public class Model implements Parcelable {
-  public String title;
   public Templete templete;
-  public String path;
-  public String artist;
-  public String cover;
   public Motion motion;
+  public Song song;
+
+  private Model(Builder builder) {
+    templete = builder.templete;
+    motion = builder.motion;
+    song = builder.song;
+  }
 
   @Override
   public String toString() {
     return "Model{" +
-        "title='" + title + '\'' +
-        ", templete=" + templete +
-        ", path='" + path + '\'' +
-        ", artist='" + artist + '\'' +
-        ", cover='" + cover + '\'' +
+        "templete=" + templete +
         ", motion=" + motion +
+        ", song=" + song +
         '}';
   }
 
@@ -33,67 +33,39 @@ public class Model implements Parcelable {
 
     Model model = (Model) o;
 
-    if (title != null ? !title.equals(model.title) : model.title != null) return false;
     if (templete != model.templete) return false;
-    if (path != null ? !path.equals(model.path) : model.path != null) return false;
-    if (artist != null ? !artist.equals(model.artist) : model.artist != null) return false;
-    if (cover != null ? !cover.equals(model.cover) : model.cover != null) return false;
-    return motion != null ? motion.equals(model.motion) : model.motion == null;
+    if (motion != null ? !motion.equals(model.motion) : model.motion != null) return false;
+    return song != null ? song.equals(model.song) : model.song == null;
 
   }
 
   @Override
   public int hashCode() {
-    int result = title != null ? title.hashCode() : 0;
-    result = 31 * result + (templete != null ? templete.hashCode() : 0);
-    result = 31 * result + (path != null ? path.hashCode() : 0);
-    result = 31 * result + (artist != null ? artist.hashCode() : 0);
-    result = 31 * result + (cover != null ? cover.hashCode() : 0);
+    int result = templete != null ? templete.hashCode() : 0;
     result = 31 * result + (motion != null ? motion.hashCode() : 0);
+    result = 31 * result + (song != null ? song.hashCode() : 0);
     return result;
   }
 
-  private Model(Builder builder) {
-    title = builder.title;
-    templete = builder.templete;
-    path = builder.path;
-    artist = builder.artist;
-    cover = builder.cover;
-    motion = builder.motion;
+  public enum Templete {
+    ITEM_SONG
   }
 
   public static final class Builder {
-    String title;
-    Templete templete;
-    String path;
-    String artist;
-    String cover;
+    private Templete templete;
     private Motion motion;
+    private Song song;
 
     public Builder() {}
 
-    public Builder title(String title) {
-      this.title = title;
-      return this;
+    public Builder(Model copy) {
+      this.templete = copy.templete;
+      this.motion = copy.motion;
+      this.song = copy.song;
     }
 
-    public Builder templete(Templete templete) {
-      this.templete = templete;
-      return this;
-    }
-
-    public Builder path(String path) {
-      this.path = path;
-      return this;
-    }
-
-    public Builder artist(String artist) {
-      this.artist = artist;
-      return this;
-    }
-
-    public Builder cover(String cover) {
-      this.cover = cover;
+    public Builder templete(Templete val) {
+      templete = val;
       return this;
     }
 
@@ -102,13 +74,14 @@ public class Model implements Parcelable {
       return this;
     }
 
+    public Builder song(Song val) {
+      song = val;
+      return this;
+    }
+
     public Model build() {
       return new Model(this);
     }
-  }
-
-  public enum Templete {
-    ITEM_SONG
   }
 
   @Override
@@ -118,25 +91,19 @@ public class Model implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(this.title);
     dest.writeInt(this.templete == null ? -1 : this.templete.ordinal());
-    dest.writeString(this.path);
-    dest.writeString(this.artist);
-    dest.writeString(this.cover);
     dest.writeParcelable(this.motion, flags);
+    dest.writeParcelable(this.song, flags);
   }
 
   protected Model(Parcel in) {
-    this.title = in.readString();
     int tmpTemplete = in.readInt();
     this.templete = tmpTemplete == -1 ? null : Templete.values()[tmpTemplete];
-    this.path = in.readString();
-    this.artist = in.readString();
-    this.cover = in.readString();
     this.motion = in.readParcelable(Motion.class.getClassLoader());
+    this.song = in.readParcelable(Song.class.getClassLoader());
   }
 
-  public static final Creator<Model> CREATOR = new Creator<Model>() {
+  public static final Parcelable.Creator<Model> CREATOR = new Parcelable.Creator<Model>() {
     @Override
     public Model createFromParcel(Parcel source) {
       return new Model(source);

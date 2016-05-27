@@ -1,6 +1,7 @@
 package com.reed.reedplayer.model;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -18,7 +19,6 @@ import java.util.List;
  */
 public class LocalSongsModelSource extends BaseModelSource {
 
-
   @Override
   protected List<Model> getModels() {
     List<Model> models = new ArrayList<>();
@@ -34,16 +34,26 @@ public class LocalSongsModelSource extends BaseModelSource {
       count = cur.getCount();
 
       if (count > 0) {
+        Uri artworkUri = Uri.parse("content://media/external/audio/albumart");
         while (cur.moveToNext()) {
-          Model model = new Model.Builder()
+          Song song = new Song.Builder()
               .path(CheckUtils.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.DATA)),
                   Consts.EMPTY_STRING))
               .artist(
                   CheckUtils.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.ARTIST)),
                       Consts.EMPTY_STRING))
-              .title(
-                  CheckUtils.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.TITLE)),
+              .title(CheckUtils.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.TITLE)),
+                  Consts.EMPTY_STRING))
+              .cover(ContentUris.withAppendedId(artworkUri, CheckUtils
+                  .get(cur.getLong(cur.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)), 0L)))
+              .duration(CheckUtils
+                  .get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.DURATION)),
                       Consts.EMPTY_STRING))
+              .id(CheckUtils.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media._ID)),
+                  Consts.EMPTY_STRING))
+              .build();
+          Model model = new Model.Builder()
+              .song(song)
               .templete(Model.Templete.ITEM_SONG)
               .motion(new Motion.Builder().clazz(PlayActivity.class).build())
               .build();

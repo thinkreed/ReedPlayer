@@ -1,8 +1,10 @@
 package com.reed.reedplayer.presenter;
 
 
+import android.net.Uri;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.reed.reedplayer.R;
 import com.reed.reedplayer.model.Model;
 
@@ -19,14 +21,19 @@ public class DisplayPresenter extends Presenter {
     if (content instanceof String && getView() instanceof TextView) {
       ((TextView) getView()).setText((String) content);
     }
+    if (content instanceof Uri && getView() instanceof SimpleDraweeView) {
+      ((SimpleDraweeView) getView()).setImageURI((Uri) content);
+    }
   }
 
   private Object getContent(Model model) {
     switch (getId()) {
       case R.id.artist:
-        return model.artist;
+        return model.song.artist;
       case R.id.title:
-        return model.title;
+        return model.song.title;
+      case R.id.cover:
+        return model.song.cover;
       default:
         return null;
     }

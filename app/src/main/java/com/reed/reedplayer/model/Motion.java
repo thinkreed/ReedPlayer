@@ -63,6 +63,12 @@ public class Motion implements Parcelable {
 
     public Builder() {}
 
+    public Builder(Motion copy) {
+      this.type = copy.type;
+      this.bundle = copy.bundle;
+      this.clazz = copy.clazz;
+    }
+
     public Builder type(Type val) {
       type = val;
       return this;

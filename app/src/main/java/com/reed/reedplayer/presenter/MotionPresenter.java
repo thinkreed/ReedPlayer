@@ -21,6 +21,8 @@ public class MotionPresenter extends Presenter {
             intent.putExtra(Consts.KEY_MODEL, model);
             getView().getContext().startActivity(intent);
             break;
+          default:
+            break;
         }
       }
     });

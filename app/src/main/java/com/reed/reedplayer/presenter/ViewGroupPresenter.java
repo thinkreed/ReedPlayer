@@ -26,9 +26,7 @@ public class ViewGroupPresenter {
   public void bind(Model model) {
     for (int i = 0; i < mChildPresenters.size(); i++) {
       Presenter presenter = findChildPresenter(i);
-      if (presenter != null) {
-        presenter.bind(model);
-      }
+      if (presenter != null) presenter.bind(model);
     }
   }
 

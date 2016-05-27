@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.ViewGroup;
 
 import com.reed.reedplayer.R;
+import com.reed.reedplayer.ReedApplication;
 import com.reed.reedplayer.model.Model;
 import com.reed.reedplayer.presenter.DisplayPresenter;
 import com.reed.reedplayer.presenter.MotionPresenter;
 import com.reed.reedplayer.presenter.ViewGroupPresenter;
+
+import java.util.List;
 
 /**
  * Created by thinkreed on 16/5/23.
@@ -31,5 +34,11 @@ public class SongListAdapter extends BaseReedAdapter {
   @Override
   public int getItemViewType(int position) {
     return getDataList().get(position).templete.ordinal();
+  }
+
+  @Override
+  public void onDataRetrived(List<Model> models) {
+    super.onDataRetrived(models);
+    ReedApplication.getInstance().getQueueManager().setPlaylist(models);
   }
 }
