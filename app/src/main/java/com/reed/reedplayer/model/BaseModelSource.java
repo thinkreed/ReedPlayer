@@ -1,10 +1,12 @@
 package com.reed.reedplayer.model;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by thinkreed on 16/5/23.
@@ -16,23 +18,31 @@ public abstract class BaseModelSource {
   }
 
   private List<SourceObserver> mObservers = new ArrayList<>();
-  private Handler mHandler = new Handler(Looper.getMainLooper());
 
   public void retriveData() {
-    new Thread(new Runnable() {
+    Observable.create(new Observable.OnSubscribe<List<Model>>() {
       @Override
-      public void run() {
-        final List<Model> models = getModels();
-        if (models != null && models.size() > 0) {
-          mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-              notifyDataRetrived(models);
-            }
-          });
-        }
+      public void call(Subscriber<? super List<Model>> subscriber) {
+        subscriber.onNext(getModels());
+        subscriber.onCompleted();
       }
-    }).start();
+    }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Subscriber<List<Model>>() {
+          @Override
+          public void onCompleted() {
+
+      }
+
+          @Override
+          public void onError(Throwable e) {
+
+      }
+
+          @Override
+          public void onNext(List<Model> models) {
+            notifyDataRetrived(models);
+          }
+        });
   }
 
   public void registerObserver(SourceObserver observer) {
