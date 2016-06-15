@@ -1,5 +1,7 @@
 package com.reed.reedplayer.model;
 
+import com.reed.reedplayer.utils.CheckUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +25,22 @@ public abstract class BaseModelSource {
     Observable.create(new Observable.OnSubscribe<List<Model>>() {
       @Override
       public void call(Subscriber<? super List<Model>> subscriber) {
-        subscriber.onNext(getModels());
-        subscriber.onCompleted();
+        List<Model> models = getModels();
+        if (CheckUtils.isEmpty(models)) {
+          subscriber.onError(new Exception("empty models"));
+        } else {
+          subscriber.onNext(models);
+          subscriber.onCompleted();
+        }
       }
     }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Subscriber<List<Model>>() {
+
+          @Override
+          public void onStart() {
+            super.onStart();
+          }
+
           @Override
           public void onCompleted() {
 
