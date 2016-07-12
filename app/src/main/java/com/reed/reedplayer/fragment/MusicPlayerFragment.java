@@ -27,9 +27,7 @@ public class MusicPlayerFragment extends BaseFragment
   private TextView mTitle;
   private TextView mArtist;
   private AudioPlayer mPlayer;
-  private ImageView mBtnPrev;
   private ImageView mBtnPause;
-  private ImageView mBtnNext;
   private SimpleDraweeView mCover;
   private SeekBar mProgress;
   private Handler mHandler;
@@ -52,9 +50,9 @@ public class MusicPlayerFragment extends BaseFragment
     super.onViewCreated(view, savedInstanceState);
     mTitle = (TextView) view.findViewById(R.id.title);
     mArtist = (TextView) view.findViewById(R.id.artist);
-    mBtnNext = (ImageView) view.findViewById(R.id.btn_next);
+    View btnNext = view.findViewById(R.id.btn_next);
     mBtnPause = (ImageView) view.findViewById(R.id.btn_play_pause);
-    mBtnPrev = (ImageView) view.findViewById(R.id.btn_prev);
+    View btnPrev = view.findViewById(R.id.btn_prev);
     mCover = (SimpleDraweeView) view.findViewById(R.id.cover);
     mProgress = (SeekBar) view.findViewById(R.id.progress);
     mHandler = new Handler();
@@ -65,13 +63,13 @@ public class MusicPlayerFragment extends BaseFragment
         mPlayer.togglePlayingState();
       }
     });
-    mBtnPrev.setOnClickListener(new View.OnClickListener() {
+    btnPrev.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         mPlayer.previous();
       }
     });
-    mBtnNext.setOnClickListener(new View.OnClickListener() {
+    btnNext.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         mPlayer.next();

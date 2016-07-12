@@ -8,7 +8,7 @@ import com.reed.reedplayer.fragment.MusicPlayerFragment;
 /**
  * Created by thinkreed on 16/5/25.
  */
-public class MusicPlayerActivity extends BaseActivity {
+public class MusicPlayerActivity extends FullScreenActivity {
   @Override
   protected BaseFragment getFragment() {
     Bundle bundle = getIntent().getExtras();
