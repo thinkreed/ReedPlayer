@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.reed.reedplayer.ReedApplication;
-import com.reed.reedplayer.activity.PlayActivity;
+import com.reed.reedplayer.activity.MusicPlayerActivity;
 import com.reed.reedplayer.utils.CheckUtils;
 import com.reed.reedplayer.utils.Consts;
 
@@ -55,7 +55,7 @@ public class LocalSongsModelSource extends BaseModelSource {
           Model model = new Model.Builder()
               .song(song)
               .templete(Model.Templete.ITEM_SONG)
-              .motion(new Motion.Builder().clazz(PlayActivity.class).build())
+              .motion(new Motion.Builder().clazz(MusicPlayerActivity.class).build())
               .build();
           models.add(model);
         }

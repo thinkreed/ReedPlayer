@@ -6,6 +6,7 @@ package com.reed.reedplayer.utils;
 public class Consts {
   public static final String TAG = "reed";
   public static final String EMPTY_STRING = "";
-
+  // keys
   public static final String KEY_MODEL = "key_model";
+  public static final String KEY_TYPE = "type";
 }

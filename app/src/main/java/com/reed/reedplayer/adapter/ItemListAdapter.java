@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by thinkreed on 16/5/23.
  */
-public class SongListAdapter extends BaseReedAdapter {
+public class ItemListAdapter extends BaseReedAdapter {
   @Override
   protected ViewGroupPresenter createViewGroupPresenter(ViewGroup parent, Context context,
       int viewType) {

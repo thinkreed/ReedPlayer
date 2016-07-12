@@ -19,7 +19,7 @@ import com.reed.reedplayer.utils.Consts;
 /**
  * Created by thinkreed on 16/5/25.
  */
-public class PlayerFragment extends BaseFragment
+public class MusicPlayerFragment extends BaseFragment
     implements
       AudioPlayer.OnPlayingStateChangedListener,
       SeekBar.OnSeekBarChangeListener {
@@ -34,8 +34,8 @@ public class PlayerFragment extends BaseFragment
   private SeekBar mProgress;
   private Handler mHandler;
 
-  public static PlayerFragment getInstance(Bundle bundle) {
-    PlayerFragment fragment = new PlayerFragment();
+  public static MusicPlayerFragment getInstance(Bundle bundle) {
+    MusicPlayerFragment fragment = new MusicPlayerFragment();
     fragment.setArguments(bundle);
     return fragment;
   }
