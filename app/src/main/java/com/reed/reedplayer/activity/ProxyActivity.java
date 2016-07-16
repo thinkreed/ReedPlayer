@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
-import com.reed.reedplayer.ReedApplication;
 import com.reed.reedplayer.component.ActivityManagerHandler;
 import com.reed.reedplayer.component.HelloHandler;
 import com.reed.reedplayer.component.IForTest;
 import com.reed.reedplayer.component.ProxyInstrumentation;
+import com.reed.reedplayer.component.StartActivityCallBack;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -37,12 +38,12 @@ public class ProxyActivity extends Activity {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    firstHook();
-    firstDynamicProxy();
+    // firstHook();
+    // firstDynamicProxy();
     firstAndroidManagerServiceHook();
-    Intent intent = new Intent(this, SongListActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    ReedApplication.getInstance().startActivity(intent);
+    firstHandleHookedStartActivity();
+    Intent intent = new Intent(this, TargetActivity.class);
+    startActivity(intent);
   }
 
   public void firstHook() {
@@ -88,6 +89,24 @@ public class ProxyActivity extends Activity {
       Object proxyActivityManager = Proxy.newProxyInstance(IActivityManager.getClassLoader(),
           new Class[] {IActivityManager}, new ActivityManagerHandler(activityManager));
       fieldInstance.set(gDefault, proxyActivityManager);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void firstHandleHookedStartActivity() {
+    try {
+      Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
+      Method reCurrentActivityThreadMethod =
+          activityThreadClass.getDeclaredMethod("currentActivityThread");
+      reCurrentActivityThreadMethod.setAccessible(true);
+      Object activityThread = reCurrentActivityThreadMethod.invoke(null);
+      Field field = activityThreadClass.getDeclaredField("mH");
+      field.setAccessible(true);
+      Handler mH = (Handler) field.get(activityThread);
+      Field mCallback = Handler.class.getDeclaredField("mCallback");
+      mCallback.setAccessible(true);
+      mCallback.set(mH, new StartActivityCallBack(mH));
     } catch (Exception e) {
       e.printStackTrace();
     }

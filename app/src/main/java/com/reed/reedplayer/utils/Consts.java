@@ -9,4 +9,6 @@ public class Consts {
   // keys
   public static final String KEY_MODEL = "key_model";
   public static final String KEY_TYPE = "type";
+  //extras
+  public static final String EXTRA_ORIGIN_INTENT = "origin_intent";
 }

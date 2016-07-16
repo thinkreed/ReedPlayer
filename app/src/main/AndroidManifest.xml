@@ -25,6 +25,7 @@
 
         <activity android:name=".activity.SongListActivity" />
         <activity android:name=".activity.ProxyActivity" />
+        <activity android:name=".activity.ForTestActivity" />
         <activity
             android:name=".activity.MusicPlayerActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
