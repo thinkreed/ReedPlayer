@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.reed.reedplayer.R;
-import com.reed.reedplayer.activity.ProxyActivity;
+import com.reed.reedplayer.activity.VideoPlayerActivity;
 
 /**
  * Created by thinkreed on 16/5/23.
@@ -32,7 +32,7 @@ public class MainFragment extends BaseFragment {
     view.findViewById(R.id.btn_local_songs).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), ProxyActivity.class);
+        Intent intent = new Intent(getActivity(), VideoPlayerActivity.class);
         startActivity(intent);
       }
     });
