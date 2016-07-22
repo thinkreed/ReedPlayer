@@ -9,6 +9,6 @@ import com.reed.reedplayer.fragment.VideoPlayerFragment;
 public class VideoPlayerActivity extends FullScreenActivity {
   @Override
   protected BaseFragment getFragment() {
-    return VideoPlayerFragment.newInstance(null);
+    return VideoPlayerFragment.newInstance(getIntent().getExtras());
   }
 }

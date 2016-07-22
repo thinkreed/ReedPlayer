@@ -3,6 +3,7 @@ package com.reed.reedplayer.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,11 +104,13 @@ public class MusicPlayerFragment extends BaseFragment
     switch (state) {
       case AudioPlayer.STATE_PAUSED:
         mBtnPause
-            .setImageDrawable(getResources().getDrawable(R.drawable.uamp_ic_play_arrow_white_24dp));
+            .setImageDrawable(
+                ContextCompat.getDrawable(getActivity(), R.drawable.uamp_ic_play_arrow_white_24dp));
         mHandler.removeCallbacksAndMessages(null);
         break;
       case AudioPlayer.STATE_PLAYING:
-        mBtnPause.setImageDrawable(getResources().getDrawable(R.drawable.uamp_ic_pause_white_24dp));
+        mBtnPause.setImageDrawable(
+            ContextCompat.getDrawable(getActivity(), R.drawable.uamp_ic_pause_white_24dp));
         mHandler.post(new RefreshTask());
         break;
       default:

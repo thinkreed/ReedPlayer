@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.reed.reedplayer.R;
 import com.reed.reedplayer.activity.VideoPlayerActivity;
+import com.reed.reedplayer.utils.Consts;
 
 /**
  * Created by thinkreed on 16/5/23.
@@ -33,6 +34,7 @@ public class MainFragment extends BaseFragment {
       @Override
       public void onClick(View v) {
         Intent intent = new Intent(getActivity(), VideoPlayerActivity.class);
+        intent.putExtra(Consts.KEY_PATH, "/storage/emulated/0/acg/03.mp4");
         startActivity(intent);
       }
     });
