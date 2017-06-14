@@ -3,6 +3,7 @@ package com.reed.reedplayer;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.igexin.sdk.PushManager;
 import com.reed.reedplayer.component.QueueManager;
 
 /**
@@ -10,33 +11,39 @@ import com.reed.reedplayer.component.QueueManager;
  */
 public class ReedApplication extends Application {
 
-  private static ReedApplication sInstance;
-  private QueueManager mQueueManager;
+    private static ReedApplication sInstance;
+    private QueueManager mQueueManager;
 
-  public static ReedApplication getInstance() {
-    return sInstance;
-  }
+    public static ReedApplication getInstance() {
+        return sInstance;
+    }
 
-  public ReedApplication() {
-    sInstance = this;
-  }
+    public ReedApplication() {
+        sInstance = this;
+    }
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    initializeFresco();
-    initializeQueueManager();
-  }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        initializeFresco();
+        initializeQueueManager();
+        initializeGetui();
+    }
 
-  private void initializeFresco() {
-    Fresco.initialize(this);
-  }
+    private void initializeGetui() {
+        PushManager.getInstance().initialize(this.getApplicationContext(), com.reed.reedplayer.DemoPushService.class);
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);
+    }
 
-  private void initializeQueueManager() {
-    this.mQueueManager = new QueueManager();
-  }
+    private void initializeFresco() {
+        Fresco.initialize(this);
+    }
 
-  public QueueManager getQueueManager() {
-    return this.mQueueManager;
-  }
+    private void initializeQueueManager() {
+        this.mQueueManager = new QueueManager();
+    }
+
+    public QueueManager getQueueManager() {
+        return this.mQueueManager;
+    }
 }

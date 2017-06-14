@@ -27,6 +27,13 @@
         <activity android:name=".activity.ProxyActivity" />
         <activity android:name=".activity.ForTestActivity" />
         <activity android:name=".activity.VideoPlayerActivity" />
+        <service
+            android:name="com.reed.reedplayer.DemoPushService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":pushservice">
+        </service>
+        <service android:name="com.reed.reedplayer.DemoIntentService"/>
         <activity
             android:name=".activity.MusicPlayerActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
