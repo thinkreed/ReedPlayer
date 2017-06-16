@@ -55,7 +55,7 @@ public class VideoPlayerFragment extends BaseFragment {
         mMediaController.start();
       }
     });
-    String path = getArguments().getString(Consts.KEY_PATH);
+    String path = getArguments().getString(Consts.INSTANCE.getKEY_PATH());
     emVideoView.setVideoPath(path);
   }
 

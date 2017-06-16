@@ -77,7 +77,7 @@ public class MusicPlayerFragment extends BaseFragment
       }
     });
     Bundle bundle = getArguments();
-    Model model = bundle.getParcelable(Consts.KEY_MODEL);
+    Model model = bundle.getParcelable(Consts.INSTANCE.getKEY_MODEL());
     if (model != null) {
       refreshSongInfo(model);
       mPlayer = new AudioPlayer(model);

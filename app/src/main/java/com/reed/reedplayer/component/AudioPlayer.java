@@ -68,7 +68,7 @@ public class AudioPlayer
       mMediaPlayer.setDataSource(path);
       mMediaPlayer.prepareAsync();
     } catch (Exception e) {
-      Log.e(Consts.TAG, e.getMessage());
+      Log.e(Consts.INSTANCE.getTAG(), e.getMessage());
     }
   }
 

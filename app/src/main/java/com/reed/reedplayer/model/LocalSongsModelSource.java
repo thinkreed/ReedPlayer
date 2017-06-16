@@ -37,20 +37,20 @@ public class LocalSongsModelSource extends BaseModelSource {
         Uri artworkUri = Uri.parse("content://media/external/audio/albumart");
         while (cur.moveToNext()) {
           Song song = new Song.Builder()
-              .path(CheckUtils.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.DATA)),
-                  Consts.EMPTY_STRING))
+              .path(CheckUtils.INSTANCE.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.DATA)),
+                      Consts.INSTANCE.getEMPTY_STRING()))
               .artist(
-                  CheckUtils.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.ARTIST)),
-                      Consts.EMPTY_STRING))
-              .title(CheckUtils.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.TITLE)),
-                  Consts.EMPTY_STRING))
-              .cover(ContentUris.withAppendedId(artworkUri, CheckUtils
+                  CheckUtils.INSTANCE.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.ARTIST)),
+                          Consts.INSTANCE.getEMPTY_STRING()))
+              .title(CheckUtils.INSTANCE.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.TITLE)),
+                      Consts.INSTANCE.getEMPTY_STRING()))
+              .cover(ContentUris.withAppendedId(artworkUri, CheckUtils.INSTANCE
                   .get(cur.getLong(cur.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)), 0L)))
-              .duration(CheckUtils
+              .duration(CheckUtils.INSTANCE
                   .get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.DURATION)),
-                      Consts.EMPTY_STRING))
-              .id(CheckUtils.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media._ID)),
-                  Consts.EMPTY_STRING))
+                          Consts.INSTANCE.getEMPTY_STRING()))
+              .id(CheckUtils.INSTANCE.get(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media._ID)),
+                      Consts.INSTANCE.getEMPTY_STRING()))
               .build();
           Model model = new Model.Builder()
               .song(song)

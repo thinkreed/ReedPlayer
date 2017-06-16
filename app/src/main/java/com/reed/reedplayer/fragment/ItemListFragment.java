@@ -48,7 +48,7 @@ public class ItemListFragment extends BaseFragment {
   private BaseModelSource getModelSource() {
     Bundle bundle = getArguments();
     return ModelSourceFactory
-        .createModelSource(SourceType.values()[bundle.getInt(Consts.KEY_TYPE)]);
+        .createModelSource(SourceType.values()[bundle.getInt(Consts.INSTANCE.getKEY_TYPE())]);
   }
 
 }

@@ -18,7 +18,7 @@ public class MotionPresenter extends Presenter {
         switch (getId()) {
           case 0:
             Intent intent = new Intent(getView().getContext(), model.motion.clazz);
-            intent.putExtra(Consts.KEY_MODEL, model);
+            intent.putExtra(Consts.INSTANCE.getKEY_MODEL(), model);
             getView().getContext().startActivity(intent);
             break;
           default:

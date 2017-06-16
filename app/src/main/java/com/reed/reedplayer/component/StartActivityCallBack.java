@@ -28,7 +28,7 @@ public class StartActivityCallBack implements Handler.Callback {
           Field intent = obj.getClass().getDeclaredField("intent");
           intent.setAccessible(true);
           Intent originIntent = (Intent) intent.get(obj);
-          intent.set(obj, originIntent.getParcelableExtra(Consts.EXTRA_ORIGIN_INTENT));
+          intent.set(obj, originIntent.getParcelableExtra(Consts.INSTANCE.getEXTRA_ORIGIN_INTENT()));
         } catch (Exception e) {
           e.printStackTrace();
         }

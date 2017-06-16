@@ -32,7 +32,7 @@ public class ActivityManagerHandler extends BaseProxyHandler {
       ComponentName componentName =
           new ComponentName("com.reed.reedplayer", ForTestActivity.class.getCanonicalName());
       intent.setComponent(componentName);
-      intent.putExtra(Consts.EXTRA_ORIGIN_INTENT, (Intent) args[index]);
+      intent.putExtra(Consts.INSTANCE.getEXTRA_ORIGIN_INTENT(), (Intent) args[index]);
       args[index] = intent;
     }
     return method.invoke(mOrigin, args);

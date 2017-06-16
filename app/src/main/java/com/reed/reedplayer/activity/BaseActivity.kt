@@ -21,5 +21,5 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    protected abstract fun getFragment():Fragment
+    protected abstract fun getFragment(): Fragment
 }

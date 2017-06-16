@@ -11,10 +11,10 @@ import com.reed.reedplayer.utils.SourceType;
  * Created by thinkreed on 16/5/23.
  */
 public class SongListActivity extends BaseActivity {
-  @Override
-  protected BaseFragment getFragment() {
-    Bundle bundle = new Bundle();
-    bundle.putInt(Consts.KEY_TYPE, SourceType.LOCAL_MUSIC.ordinal());
-    return ItemListFragment.getInstance(bundle);
-  }
+    @Override
+    protected BaseFragment getFragment() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Consts.INSTANCE.getKEY_TYPE(), SourceType.LOCAL_MUSIC.ordinal());
+        return ItemListFragment.getInstance(bundle);
+    }
 }

@@ -14,13 +14,13 @@ public class QueueManager {
   private int mCurrentIndex;
 
   public Model next() {
-    return CheckUtils.isEmpty(mPlayList)
+    return CheckUtils.INSTANCE.isEmpty(mPlayList)
         ? null
         : mPlayList.get(++mCurrentIndex % mPlayList.size());
   }
 
   public Model prev() {
-    if (CheckUtils.isEmpty(mPlayList)) {
+    if (CheckUtils.INSTANCE.isEmpty(mPlayList)) {
       return null;
     }
     if (mCurrentIndex == 0) {

@@ -26,7 +26,7 @@ public abstract class BaseModelSource {
       @Override
       public void call(Subscriber<? super List<Model>> subscriber) {
         List<Model> models = getModels();
-        if (CheckUtils.isEmpty(models)) {
+        if (CheckUtils.INSTANCE.isEmpty(models)) {
           subscriber.onError(new Exception("empty models"));
         } else {
           subscriber.onNext(models);
