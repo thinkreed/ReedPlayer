@@ -12,6 +12,6 @@ public class MusicPlayerActivity extends FullScreenActivity {
     @Override
     protected BaseFragment getFragment() {
         Bundle bundle = getIntent().getExtras();
-        return MusicPlayerFragment.getInstance(bundle);
+        return MusicPlayerFragment.Companion.getInstance(bundle);
     }
 }
